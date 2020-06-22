@@ -11,8 +11,10 @@ function dropByCacheKey(pathname: string) {
     if (index !== -1) {
       alivePathnames.splice(index, 1);
       if (pathname.indexOf('detail') !== -1) {
-        pathname = pathname.split('/').slice(0, 4).join('/')
-        pathname = pathname + '/:id';
+        const tempName = pathname.split('/').slice(0, 4).join('/');
+        if(tempName !== pathname){
+          pathname = tempName + ‘/:id';
+        }
       }
       // 用来当作key，只有key发生变化才会remout组件
       keepAliveViewMap[pathname].recreateTimes += 1;
